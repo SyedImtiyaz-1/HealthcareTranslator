@@ -72,6 +72,9 @@ function App() {
             }
         } catch (error) {
             console.error('Error deleting conversation:', error);
+            alert("Failed to delete conversation. Please try again.");
+            // Revert the local change if the API call fails
+            fetchConversations();
         }
     };
 
