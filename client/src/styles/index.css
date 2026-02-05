@@ -631,16 +631,39 @@ body {
     }
 
     .chat-input-container {
+        flex-direction: column;
+        align-items: stretch;
         gap: 8px;
-        align-items: center;
     }
 
     .chat-input {
+        width: 100%;
         font-size: 14px;
         padding: 10px;
         min-height: 44px;
         /* Touch target size */
     }
+
+    /* Wrap buttons in a container if needed, or just let them flex */
+    /* But since we can't change HTML easily, we rely on flex behavior. 
+       If we make the container column, the buttons will stack vertically too which might be too tall.
+       Wait, the container has [Input, Recorder, Send]. 
+       If we do column, we get:
+       [Input]
+       [Recorder]
+       [Send]
+       
+       That's better than squeezed, but maybe [Input] on top, and [Recorder, Send] side-by-side is better?
+       The HTML structure is:
+       <div className="chat-input-container">
+           <textarea ... />
+           <AudioRecorder ... />
+           <button ... />
+       </div>
+       
+       We can't easily group the last two without changing JS.
+       So let's just make them ALL stack for now to be safe and clear.
+    */
 
     .record-btn,
     .send-btn {
@@ -652,7 +675,9 @@ body {
     .send-btn {
         font-size: 13px;
     }
-}/* Loading Overlay */
+}
+
+/* Loading Overlay */
 .loading-overlay {
     position: fixed;
     top: 0;
